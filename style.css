@@ -47,7 +47,7 @@ body{
   margin:0;
   font-family:'Gibson','Fredoka',system-ui,-apple-system,Arial,sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  background:url('Fundo2.png') center top/cover no-repeat;
+  background:url('Fundo3.png') center top/cover no-repeat;
   display:flex; align-items:center; justify-content:center; min-height:100vh;
 }
 
@@ -134,6 +134,7 @@ form input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px
 @media (max-width:420px){
   :root{ --card-w:96px; --card-h:110px; --gap:12px; --login-w:420px; --game-w:520px; --rank-w:460px }
 }
+
 
 
 
