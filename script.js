@@ -185,11 +185,12 @@ function initGame(nomeJogador){
     gameEnded = true; clearInterval(timerInterval);
     const elapsed = Math.floor((Date.now()-startTime)/1000);
     const msg = victory
-      ? `🎉 Parabéns! Você venceu com ${score} pontos em ${elapsed}s!`
-      : `⏳ Tempo esgotado! Você fez ${score} pontos.`;
+      ? `🎉 Parabens 🎉  Voce venceu com ${score} pontos em ${elapsed}s!`
+      : `⏳ Tempo esgotado⏳ Voce fez ${score} pontos.`;
     addToRanking({ nome: nomeJogador, score, elapsed, ts: Date.now() }); showRanking(msg);
   }
   createBoard();
 }
+
 
 
