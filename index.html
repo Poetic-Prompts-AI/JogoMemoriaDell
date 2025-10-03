@@ -17,18 +17,18 @@
     <div class="panel login-card">
       <img id="logoBtn" class="logo-btn" src="logo.png" alt="ScanSource" />
       <h1 class="brand">Dell na ScanSource</h1>
-      <p class="subtitle">Preencha para começar</p>
+      <p class="subtitle">Preencha para jogar</p>
 
       <form id="loginForm" novalidate>
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
-        <label for="telefone">Telefone (só números)</label>
+        <label for="telefone">Telefone (numeros)</label>
         <input
           type="tel" id="telefone" name="telefone"
           placeholder="Ex.: 11999998888" inputmode="numeric" pattern="\d{10,11}" required
         />
-        <small class="hint">Aceita 10 ou 11 dígitos (ex.: 11999998888).</small>
+        <small class="hint">Aceita 10 ou 11 digitos (ex.: 11999998888).</small>
 
         <button type="submit" id="btnEntrar" class="btn-primary">Entrar e jogar</button>
         <p id="loginErro" class="erro hidden"></p>
@@ -64,3 +64,4 @@
   <script src="script.js?v=gibson-fix-acentos"></script>
 </body>
 </html>
+
