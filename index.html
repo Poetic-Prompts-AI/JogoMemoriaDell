@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jogo da Memoria — ScanSource</title>
+  <title>Jogo da Memória — ScanSource</title>
 
   <!-- CSS (bump de versão para forçar atualização no totem) -->
   <link rel="stylesheet" href="style.css?v=gibson-fix-acentos" />
@@ -15,20 +15,20 @@
   <!-- LOGIN -->
   <div id="loginOverlay" class="overlay">
     <div class="panel login-card">
-      <img id="logoBtn" class="logo-btn" src="logo.png" alt="ScanSource" />
-      <h1 class="brand">Dell na ScanSource</h1>
-      <p class="subtitle">Preencha para jogar</p>
+      <img id="logoBtn" class="logo-btn" src="scansource-cor.png" alt="ScanSource" />
+      <h1 class="brand">Dell é na ScanSource!</h1>
+      <p class="subtitle">Preencha para começar</p>
 
       <form id="loginForm" novalidate>
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
-        <label for="telefone">Telefone (numeros)</label>
+        <label for="telefone">Telefone (só números)</label>
         <input
           type="tel" id="telefone" name="telefone"
           placeholder="Ex.: 11999998888" inputmode="numeric" pattern="\d{10,11}" required
         />
-        <small class="hint">Aceita 10 ou 11 digitos (ex.: 11999998888).</small>
+        <small class="hint">Aceita 10 ou 11 dígitos (ex.: 11999998888).</small>
 
         <button type="submit" id="btnEntrar" class="btn-primary">Entrar e jogar</button>
         <p id="loginErro" class="erro hidden"></p>
@@ -38,7 +38,7 @@
 
   <!-- JOGO -->
   <div class="panel container hidden" id="gameContainer">
-    <h1 class="game-title">🧠 Jogo da Memoria</h1>
+    <h1 class="game-title">🧠 Jogo da Memória</h1>
     <div class="status-bar">
       <div id="player">Jogador: —</div>
       <div id="score">Pontos: 0</div>
@@ -64,5 +64,4 @@
   <script src="script.js?v=gibson-fix-acentos"></script>
 </body>
 </html>
-
 
