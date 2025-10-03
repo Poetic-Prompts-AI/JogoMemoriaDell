@@ -191,3 +191,5 @@ function initGame(nomeJogador){
   }
   createBoard();
 }
+
+
