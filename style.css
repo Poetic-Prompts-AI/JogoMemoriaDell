@@ -1,0 +1,136 @@
+/* fallback (só se a fonte local não carregar) */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+
+/* ======== FONTE ======== */
+/* 1) Gibson DEMO: limitamos ao ASCII para evitar acentos quebrados  */
+@font-face{
+  font-family:'Gibson';
+  src:url('Fontspring-DEMO-gibson-light.otf') format('opentype');
+  font-weight:300;
+  font-style:normal;
+  font-display:swap;
+  /* Apenas Basic Latin (ASCII). Acentos cairão no fallback. */
+  unicode-range: U+0000-007F;
+}
+/* 2) Fallback com PT-BR completo (Fredoka do Google) já vem pelo @import */
+:root{
+  /* ===== PALETA (sua) ===== */
+  --p0:#FF8753; --p1:#FF603F; --p2:#FF7C52; --p3:#FF382F;
+  --p4:#FF6F4B; --p5:#FF9462; --p6:#FE4E38; --p7:#EF6748;
+
+  --panel-bg:#FFEDE4;
+  --text:#2b2b2b;
+  --accent:var(--p6);
+  --accent-2:var(--p1);
+  --card-bg:var(--p6);
+  --card-border:var(--p3);
+
+  /* TABULEIRO */
+  --card-w:120px; --card-h:140px; --gap:18px; --card-border-width:4px;
+
+  /* PAINÉIS */
+  --login-w:520px; --login-h:620px;
+  --game-w:720px;  --game-h:1000px;
+  --rank-w:560px;  --rank-h:700px;
+
+  --logo-max:180px;
+}
+@media (orientation:portrait){
+  :root{ --game-w:900px; --game-h:1400px; --card-w:200px; --card-h:240px; --gap:24px; }
+}
+
+/* Aplica Gibson (ASCII) com fallback Fredoka (acentos OK) */
+body{
+  margin:0;
+  font-family:'Gibson','Fredoka',system-ui,-apple-system,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  background:url('fundo.png') center top/cover no-repeat;
+  display:flex; align-items:center; justify-content:center; min-height:100vh;
+}
+
+/* ===== UI ===== */
+::selection{ background:var(--accent); color:#fff }
+
+.overlay{ position:fixed; inset:0; display:grid; place-items:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.10)); z-index:20 }
+.hidden{ display:none !important }
+
+.panel{
+  background:linear-gradient(180deg,#FFF,var(--panel-bg));
+  color:var(--text);
+  border-radius:20px; padding:20px;
+  box-shadow:0 12px 28px rgba(0,0,0,.18), 0 0 0 1px rgba(255,96,63,.25);
+}
+.login-card{ width:min(96vw,var(--login-w)); max-height:min(96vh,var(--login-h)); overflow:auto; text-align:center }
+.container  { width:min(96vw,var(--game-w));  max-height:min(96vh,var(--game-h));  overflow:auto; text-align:center }
+.ranking-card{width:min(96vw,var(--rank-w)); max-height:min(96vh,var(--rank-h)); overflow:auto; text-align:center}
+
+.logo-btn{ width:min(70vw,var(--logo-max)); display:block; margin:0 auto 10px; cursor:pointer }
+.brand{ font-weight:700; font-size:clamp(26px,5vw,42px); margin:0 0 6px; color:var(--accent) }
+.subtitle{ margin:0 0 18px; color:#444; font-weight:600 }
+
+form label{ display:block; text-align:left; margin:10px 4px 6px; font-size:14px; color:#3a3a3a; font-weight:600 }
+form input{
+  width:100%; padding:12px 14px; font-size:16px;
+  border:2px solid #ffd7c8; border-radius:12px; background:#fff;
+  transition:border-color .2s, box-shadow .2s;
+}
+form input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px rgba(255,96,63,.18) }
+.hint{ display:block; text-align:left; margin:8px 4px 14px; font-size:12px; color:#5a5a5a }
+
+.btn-primary{
+  width:100%; padding:12px 16px; border:none; border-radius:12px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  color:#fff; font-weight:700; cursor:pointer;
+  box-shadow:0 6px 14px rgba(255,96,63,.35);
+}
+.btn-primary:hover{ filter:brightness(1.05) }
+.btn-primary:active{ transform:translateY(1px) }
+
+.btn-secondary{ padding:10px 16px; border:none; border-radius:12px; background:#111827; color:#fff; font-weight:700; cursor:pointer }
+.btn-save{ padding:10px 16px; border:none; border-radius:12px; background:linear-gradient(90deg,var(--p3),var(--p1)); color:#fff; font-weight:700; cursor:pointer; box-shadow:0 6px 14px rgba(239,103,72,.35) }
+.erro{ margin-top:10px; color:#b00020; font-weight:700 }
+
+/* Jogo */
+.game-title{
+  font-weight:800; font-size:2.2rem; margin:0 0 10px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.status-bar{ display:grid; grid-template-columns:1fr auto auto; gap:8px 14px; align-items:center; margin-bottom:16px; font-weight:700 }
+#player{ justify-self:start }
+#score,#timer{ justify-self:end; padding:4px 10px; border-radius:999px; color:#fff; background:linear-gradient(90deg,var(--p6),var(--p1)) }
+
+/* Tabuleiro 4x4 */
+.board{ display:grid; grid-template-columns:repeat(4,var(--card-w)); grid-template-rows:repeat(4,var(--card-h)); gap:var(--gap); margin:0 auto; justify-content:center; align-items:center }
+
+/* Cartas (verso com CONTRA.png) */
+.card{
+  width:var(--card-w); height:var(--card-h);
+  background-color:var(--card-bg);
+  border:var(--card-border-width) solid var(--card-border);
+  border-radius:15px;
+  box-shadow:0 4px 6px rgba(0,0,0,.12), 0 0 0 2px rgba(255,56,47,.08);
+  cursor:pointer; transition:transform .2s, box-shadow .2s;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+  background-image:url('CONTRA.png'); background-repeat:no-repeat; background-position:center; background-size:70%;
+}
+.card:hover{ transform:scale(1.05); box-shadow:0 10px 16px rgba(0,0,0,.22), 0 0 0 4px rgba(255,124,82,.15) }
+.card.revealed,.card.matched{ background-image:none }
+.card img{ width:100%; height:100%; object-fit:cover; border-radius:12px }
+
+#winMessage{ margin-top:18px; font-size:1.2rem; font-weight:800 }
+
+/* Ranking */
+.ranking-title{ margin:0 0 8px; color:#1f2937; font-weight:800 }
+.last-result{ margin:2px 0 12px; color:#374151; font-weight:600 }
+.ranking-list{ text-align:left; background:#fff; border:1px solid #ffd2c3; border-radius:12px; padding:12px 16px; max-height:260px; overflow:auto; margin:0 0 14px; box-shadow:inset 0 1px 0 rgba(255,255,255,.5) }
+.ranking-actions{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap }
+
+/* Mobile */
+@media (max-width:420px){
+  :root{ --card-w:96px; --card-h:110px; --gap:12px; --login-w:420px; --game-w:520px; --rank-w:460px }
+}
