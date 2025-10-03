@@ -29,15 +29,12 @@ html,body{ height:100% }
   --card-border:var(--p3);
 
   /* TABULEIRO */
-  --card-w: 80px;   /* largura da carta (colunas) */
-  --card-h: 100px;  /* altura da carta (linhas)  */
-  --gap: 10px;
-  --card-border-width: 4px;
+  --card-w:120px; --card-h:140px; --gap:18px; --card-border-width:4px;
 
   /* PAINÉIS */
-  --login-w: 520px;  --login-h: 620px;
-  --game-w: 520px;   --game-h: 600px;
-  --rank-w: 560px;   --rank-h: 700px;
+  --login-w:520px; --login-h:620px;
+  --game-w:720px;  --game-h:1000px;
+  --rank-w:560px;  --rank-h:700px;
 
   --logo-max:180px;
 }
@@ -50,7 +47,7 @@ body{
   margin:0;
   font-family:'Gibson','Fredoka',system-ui,-apple-system,Arial,sans-serif;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  background:url('fundo2.png') center top/cover no-repeat;
+  background:url('fundo.png') center top/cover no-repeat;
   display:flex; align-items:center; justify-content:center; min-height:100vh;
 }
 
@@ -137,6 +134,5 @@ form input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px
 @media (max-width:420px){
   :root{ --card-w:96px; --card-h:110px; --gap:12px; --login-w:420px; --game-w:520px; --rank-w:460px }
 }
-
 
 
