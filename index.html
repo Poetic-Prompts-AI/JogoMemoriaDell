@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jogo da Memoria — ScanSource</title>
+  <title>Jogo da Memória — ScanSource</title>
 
   <!-- força atualização no totem mudando o v= -->
-  <link rel="stylesheet" href="style.css?v=contain-face-01" />
+  <link rel="stylesheet" href="style.css?v=nome-empresa-sem-ranking" />
 
   <!-- Pré-carrega o verso das cartas -->
   <link rel="preload" as="image" href="CONTRA.png" />
@@ -15,20 +15,16 @@
   <!-- LOGIN -->
   <div id="loginOverlay" class="overlay">
     <div class="panel login-card">
-      <img id="logoBtn" class="logo-btn" src="logo.png" alt="ScanSource" />
-      <h1 class="brand"></h1>
+      <img id="logoBtn" class="logo-btn" src="scansource-cor.png" alt="ScanSource" />
+      <h1 class="brand">Dell é na ScanSource!</h1>
       <p class="subtitle">Preencha para começar</p>
 
       <form id="loginForm" novalidate>
-        <label for="nome">Nome completo</label>
+        <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
 
-        <label for="telefone">Telefone (só números)</label>
-        <input
-          type="tel" id="telefone" name="telefone"
-          placeholder="Ex.: 11999998888" inputmode="numeric" pattern="\d{10,11}" required
-        />
-        <small class="hint">Aceita 10 ou 11 dígitos (ex.: 11999998888).</small>
+        <label for="empresa">Empresa</label>
+        <input type="text" id="empresa" name="empresa" placeholder="Sua empresa" required />
 
         <button type="submit" id="btnEntrar" class="btn-primary">Entrar e jogar</button>
         <p id="loginErro" class="erro hidden"></p>
@@ -48,20 +44,19 @@
     <div id="winMessage" class="hidden"></div>
   </div>
 
-  <!-- RANKING -->
-  <div id="rankingOverlay" class="overlay hidden">
-    <div class="panel ranking-card">
-      <h2 class="ranking-title">🏆 Ranking</h2>
+  <!-- FINAL (sem ranking) -->
+  <div id="resultOverlay" class="overlay hidden">
+    <div class="panel result-card">
+      <h2 class="result-title">🎉 Resultado</h2>
       <p id="lastResult" class="last-result"></p>
-      <ol id="rankingList" class="ranking-list"></ol>
-      <div class="ranking-actions">
+      <div class="result-actions">
         <button id="btnSalvarBaixar" class="btn-save">Salvar & Baixar dados</button>
         <button id="btnVoltar" class="btn-secondary">Voltar para tela inicial</button>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=contain-face-01"></script>
+  <script src="script.js?v=nome-empresa-sem-ranking"></script>
 </body>
 </html>
 
