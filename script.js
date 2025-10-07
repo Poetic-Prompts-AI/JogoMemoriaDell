@@ -160,7 +160,7 @@ function initGame(nomeJogador){
     const img = document.createElement('img');
     img.src = card.dataset.symbol; img.alt = 'carta';
     card.innerHTML = ''; card.appendChild(img);
-    card.classList.add('revealed');
+    card.classList.add('revealed');     // esconde o verso via CSS
     revealedCards.push(card);
     if(revealedCards.length === 2) checkMatch();
   }
@@ -174,7 +174,9 @@ function initGame(nomeJogador){
     scoreDisplay.textContent = `Pontos: ${score}`;
     setTimeout(()=>{
       revealedCards.forEach(card=>{
-        if(!card.classList.contains('matched')){ card.innerHTML=''; card.classList.remove('revealed'); }
+        if(!card.classList.contains('matched')){
+          card.innerHTML=''; card.classList.remove('revealed'); // volta a mostrar o verso
+        }
       });
       revealedCards = []; checkWin();
     },800);
@@ -185,12 +187,9 @@ function initGame(nomeJogador){
     gameEnded = true; clearInterval(timerInterval);
     const elapsed = Math.floor((Date.now()-startTime)/1000);
     const msg = victory
-      ? `🎉 Parabens 🎉  Voce venceu com ${score} pontos em ${elapsed}s!`
-      : `⏳ Tempo esgotado⏳ Voce fez ${score} pontos.`;
+      ? `🎉 Parabéns! Você venceu com ${score} pontos em ${elapsed}s!`
+      : `⏳ Tempo esgotado! Você fez ${score} pontos.`;
     addToRanking({ nome: nomeJogador, score, elapsed, ts: Date.now() }); showRanking(msg);
   }
   createBoard();
 }
-
-
-
