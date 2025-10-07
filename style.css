@@ -5,7 +5,7 @@
 html,body{ height:100% }
 
 /* ====== FONTE ====== */
-/* Gibson DEMO fica só pro ASCII (evita acentos quebrados); acentos caem no fallback */
+/* Gibson DEMO só para ASCII; acentos caem no fallback (Fredoka) */
 @font-face{
   font-family:'Gibson';
   src:url('Fontspring-DEMO-gibson-light.otf') format('opentype');
@@ -15,12 +15,11 @@ html,body{ height:100% }
   unicode-range: U+0000-007F;
 }
 
-/* ====== PALETA (derivada do fundo) ====== */
+/* ====== PALETA ====== */
 :root{
   --p0:#FF8753; --p1:#FF603F; --p2:#FF7C52; --p3:#FF382F;
   --p4:#FF6F4B; --p5:#FF9462; --p6:#FE4E38; --p7:#EF6748;
 
-  /* UI */
   --panel-bg:#FFEDE4;
   --text:#2b2b2b;
   --accent:var(--p6);
@@ -30,14 +29,13 @@ html,body{ height:100% }
 
   /* TABULEIRO */
   --card-w:120px; --card-h:140px; --gap:18px; --card-border-width:4px;
-  /* 👇 NOVO: espaço interno da face e fundo da face (para não cortar nada) */
-  --card-inner-pad: 10px;
-  --card-face-bg: #ffffff;
+  --card-inner-pad: 10px;         /* folga da face p/ não cortar */
+  --card-face-bg: #ffffff;        /* fundo neutro da face */
 
   /* PAINÉIS */
   --login-w:520px; --login-h:620px;
   --game-w:720px;  --game-h:1000px;
-  --rank-w:560px;  --rank-h:700px;
+  --result-w:560px;--result-h:420px;
 
   --logo-max:180px;
 }
@@ -45,11 +43,11 @@ html,body{ height:100% }
   :root{
     --game-w:900px; --game-h:1400px;
     --card-w:200px; --card-h:240px; --gap:24px;
-    --card-inner-pad: 14px; /* um pouco mais de folga em telas grandes */
+    --card-inner-pad: 14px;
   }
 }
 
-/* Aplica Gibson com fallback Fredoka (acentos OK) */
+/* ====== BASE ====== */
 body{
   margin:0;
   font-family:'Gibson','Fredoka',system-ui,-apple-system,Arial,sans-serif;
@@ -57,8 +55,6 @@ body{
   background:url('fundo.png') center top/cover no-repeat;
   display:flex; align-items:center; justify-content:center; min-height:100vh;
 }
-
-/* ===== UI ===== */
 ::selection{ background:var(--accent); color:#fff }
 
 .overlay{ position:fixed; inset:0; display:grid; place-items:center;
@@ -73,12 +69,13 @@ body{
 }
 .login-card{ width:min(96vw,var(--login-w)); max-height:min(96vh,var(--login-h)); overflow:auto; text-align:center }
 .container  { width:min(96vw,var(--game-w));  max-height:min(96vh,var(--game-h));  overflow:auto; text-align:center }
-.ranking-card{width:min(96vw,var(--rank-w)); max-height:min(96vh,var(--rank-h)); overflow:auto; text-align:center}
+.result-card { width:min(96vw,var(--result-w)); max-height:min(96vh,var(--result-h)); overflow:auto; text-align:center }
 
 .logo-btn{ width:min(70vw,var(--logo-max)); display:block; margin:0 auto 10px; cursor:pointer }
 .brand{ font-weight:700; font-size:clamp(26px,5vw,42px); margin:0 0 6px; color:var(--accent) }
 .subtitle{ margin:0 0 18px; color:#444; font-weight:600 }
 
+/* Form */
 form label{ display:block; text-align:left; margin:10px 4px 6px; font-size:14px; color:#3a3a3a; font-weight:600 }
 form input{
   width:100%; padding:12px 14px; font-size:16px;
@@ -111,7 +108,7 @@ form input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px
 #player{ justify-self:start }
 #score,#timer{ justify-self:end; padding:4px 10px; border-radius:999px; color:#fff; background:linear-gradient(90deg,var(--p6),var(--p1)) }
 
-/* ===== Tabuleiro 4x4 ===== */
+/* Tabuleiro 4x4 */
 .board{ display:grid; grid-template-columns:repeat(4,var(--card-w)); grid-template-rows:repeat(4,var(--card-h)); gap:var(--gap); margin:0 auto; justify-content:center; align-items:center }
 
 /* Cartas (verso com CONTRA.png) */
@@ -124,39 +121,37 @@ form input:focus{ outline:none; border-color:var(--accent); box-shadow:0 0 0 4px
   cursor:pointer; transition:transform .2s, box-shadow .2s;
   display:flex; align-items:center; justify-content:center; overflow:hidden;
 
-  /* verso (antes de virar) */
-  background-image:url('CONTRA.png'); background-repeat:no-repeat;
-  background-position:center; background-size:70%;
+  background-image:url('CONTRA.png');
+  background-repeat:no-repeat; background-position:center; background-size:70%;
 }
 
-/* 👇 FACE REVELADA – sem corte do produto/nome */
+/* Face revelada — sem cortes */
 .card img{
   width: calc(100% - (var(--card-inner-pad) * 2));
   height: calc(100% - (var(--card-inner-pad) * 2));
-  object-fit: contain;       /* << evita cortar */
-  object-position: center;   /* centraliza */
-  background: var(--card-face-bg); /* barras neutras quando precisar */
+  object-fit: contain;
+  object-position: center;
+  background: var(--card-face-bg);
   border-radius: 12px;
-  display: block;
-  margin: auto;              /* garante centralização mesmo com contain */
-  image-rendering: auto;
+  display:block; margin:auto;
 }
 
-/* hover / estados */
 .card:hover{ transform:scale(1.05); box-shadow:0 10px 16px rgba(0,0,0,.22), 0 0 0 4px rgba(255,124,82,.15) }
-.card.revealed,.card.matched{ background-image:none } /* esconde o verso */
+.card.revealed,.card.matched{ background-image:none }
 
 #winMessage{ margin-top:18px; font-size:1.2rem; font-weight:800 }
 
-/* Ranking */
-.ranking-title{ margin:0 0 8px; color:#1f2937; font-weight:800 }
-.last-result{ margin:2px 0 12px; color:#374151; font-weight:600 }
-.ranking-list{ text-align:left; background:#fff; border:1px solid #ffd2c3; border-radius:12px; padding:12px 16px; max-height:260px; overflow:auto; margin:0 0 14px; box-shadow:inset 0 1px 0 rgba(255,255,255,.5) }
-.ranking-actions{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap }
+/* Final (sem ranking) */
+.result-title{ margin:0 0 8px; color:#1f2937; font-weight:800 }
+.last-result{ margin:4px 0 14px; color:#374151; font-weight:600 }
+.result-actions{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap }
 
 /* Mobile */
 @media (max-width:420px){
-  :root{ --card-w:96px; --card-h:110px; --gap:12px; --card-inner-pad:8px; --login-w:420px; --game-w:520px; --rank-w:460px }
+  :root{
+    --card-w:96px; --card-h:110px; --gap:12px; --card-inner-pad:8px;
+    --login-w:420px; --game-w:520px; --result-w:460px;
+  }
 }
 
 
