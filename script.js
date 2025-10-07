@@ -199,8 +199,8 @@ function initGame(nomeJogador) {
     clearInterval(timerInterval);
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
     const msg = victory
-      ? `Parabéns! Você venceu com ${score} pontos em ${elapsed}s.`
-      : `Tempo esgotado! Você fez ${score} pontos.`;
+      ? `Uhuuuu, temos um ganhador com ${score} pontos em ${elapsed}s.`
+      : `Tempo esgotado, voce fez ${score} pontos.`;
 
     showFinal(msg);
   }
@@ -214,4 +214,5 @@ function initGame(nomeJogador) {
 
   createBoard();
 }
+
 
